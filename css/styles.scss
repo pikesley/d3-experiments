@@ -1,0 +1,54 @@
+---
+---
+@import 'colours';
+@import 'variables';
+@import 'fonts';
+
+@import 'bootstrap';
+
+@import 'footer';
+@import 'nav';
+//@import 'github-corner';
+
+.shadow {
+  -webkit-filter: drop-shadow($shadow-offset $shadow-offset $shadow-size $shadow-colour);
+  filter: drop-shadow($shadow-offset $shadow-offset $shadow-size $shadow-colour);
+}
+
+h1 {
+  color: $brand-primary;
+  font-family: $font-primary;
+}
+
+.logo {
+  @extend .shadow;
+
+  padding: $padding-large-vertical;
+
+  .pixel {
+    fill: $brand-primary;
+    stroke: darken($brand-primary, 10%);
+    stroke-width: 0.1;
+  }
+
+  .alt-pixel {
+    fill: $brand-complement;
+    stroke: darken($brand-complement, 10%);
+    stroke-width: 0.1;
+  }
+}
+
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 7%; /* aspect ratio */
+    vertical-align: middle;
+    overflow: hidden;
+}
+.svg-content-responsive {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    left: 0;
+}
