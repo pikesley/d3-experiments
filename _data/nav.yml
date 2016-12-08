@@ -1,4 +1,6 @@
-- name: Gradients
-  path: /gradients/
+- name: Two-tone Gradients
+  path: /gradients/two-tone/
+- name: Multicolour Gradients
+  path: /gradients/multicolour/
 - name: Clock
   path: /clock/

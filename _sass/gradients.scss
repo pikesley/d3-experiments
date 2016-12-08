@@ -1,0 +1,31 @@
+.logo {
+  @extend .shadow;
+
+  padding: $padding-large-vertical;
+
+  .pixel {
+    fill: $brand-primary;
+    stroke: darken($brand-primary, 10%);
+    stroke-width: 0.1;
+  }
+
+  .alt-pixel {
+    fill: $brand-complement;
+    stroke: darken($brand-complement, 10%);
+    stroke-width: 0.1;
+  }
+  $colours: $color-secondary-2-1
+            $color-secondary-2-2
+            $color-secondary-2-0
+            $color-secondary-2-3
+            $color-secondary-2-4;
+
+  @each $colour in $colours {
+    $i: index($colours, $colour);
+    .shade-#{$i - 1} {
+      fill: $colour;
+      stroke: darken($colour, 10%);
+      stroke-width: 0.1;
+    }
+  }
+}
