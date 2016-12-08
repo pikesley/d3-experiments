@@ -1,0 +1,22 @@
+.outercircle, {
+  stroke: transparentize($brand-primary, 0.6);
+}
+
+#seconds-hand {
+  fill: $rgba-complement-0;
+  stroke: darken($rgba-complement-0, $darkener);
+}
+
+#minutes-hand {
+  fill: $rgba-complement-3;
+  stroke: darken($rgba-complement-3, $darkener);
+}
+
+#hours-hand {
+  fill: $rgba-complement-4;
+  stroke: darken($rgba-complement-4, $darkener);
+}
+
+#clock {
+  text-align: center;
+}

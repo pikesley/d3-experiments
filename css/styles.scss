@@ -6,9 +6,13 @@
 
 @import 'bootstrap';
 
+@import 'components';
+
 @import 'footer';
 @import 'nav';
 //@import 'github-corner';
+
+@import 'clock';
 
 .shadow {
   -webkit-filter: drop-shadow($shadow-offset $shadow-offset $shadow-size $shadow-colour);
@@ -36,19 +40,4 @@ h1 {
     stroke: darken($brand-complement, 10%);
     stroke-width: 0.1;
   }
-}
-
-.svg-container {
-    display: inline-block;
-    position: relative;
-    width: 100%;
-    padding-bottom: 7%; /* aspect ratio */
-    vertical-align: middle;
-    overflow: hidden;
-}
-.svg-content-responsive {
-    display: inline-block;
-    position: absolute;
-    top: 10px;
-    left: 0;
 }

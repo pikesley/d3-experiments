@@ -16,8 +16,9 @@
     </div>
     <div id='navbar' class='navbar-collapse collapse'>
       <ul class='nav navbar-nav'>
-        <li><a href='{{ site.baseurl }}/foo/'>Foo</a></li>
-        <li><a href='{{ site.baseurl }}/bar/'>Bar</a></li>
+        {% for link in site.data.nav %}
+          <li><a href='{{ site.baseurl }}{{ link.path }}'>{{ link.name }}</a></li>
+        {% endfor %}
       </ul>
     </div>
   </div>

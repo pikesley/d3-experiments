@@ -1,0 +1,163 @@
+---
+---
+
+<div id='clock'></div>
+
+<script>
+fields = function() {
+  currentTime = new Date()
+  second = currentTime.getSeconds()
+  minute = currentTime.getMinutes() + second / 60
+  hour = currentTime.getHours() + minute / 60
+
+  return data = [
+    {
+      "unit": "seconds",
+      "numeric": second
+    }, {
+      "unit": "minutes",
+      "numeric": minute
+    }, {
+      "unit": "hours",
+      "numeric": hour
+    }
+  ]
+}
+
+width = 320
+height = width
+offSetX = width / 2
+offSetY = offSetX
+margin = 4
+ringWidth = (offSetX - margin) / 7
+handspan = 0.05
+cornerRadius = 10
+
+pi = Math.PI
+scaleSecs = d3.scaleLinear().domain([0, 59 + 999/1000]).range([0, 2 * pi])
+scaleMins = d3.scaleLinear().domain([0, 59 + 59/60]).range([0, 2 * pi])
+scaleHours = d3.scaleLinear().domain([0, 11 + 59/60]).range([0, 2 * pi])
+
+vis = d3.select("#clock")
+        .append("svg:svg")
+        .attr("width", width)
+        .attr("height", height)
+
+clockGroup = vis.append("svg:g")
+  .attr("transform", "translate(" + offSetX + "," + offSetY + ")")
+
+  clockGroup.append("svg:circle")
+    .attr("r", ringWidth * 7).attr("fill", "none")
+    .attr("class", "outercircle")
+    .attr("stroke-width", 2);
+  clockGroup.append("svg:circle")
+    .attr("r", ringWidth * 5).attr("fill", "none")
+    .attr("class", "outercircle")
+    .attr("stroke-width", 2);
+  clockGroup.append("svg:circle")
+    .attr("r", ringWidth * 3).attr("fill", "none")
+    .attr("class", "outercircle")
+    .attr("stroke-width", 2);
+
+/*ticks = vis.append("svg:g")
+  .attr("transform", "translate(" + offSetX + "," + offSetY + ")")
+  .attr('id', 'ticks')
+
+  ticks.selectAll('.second-tick')
+		.data(d3.range(0,12)).enter()
+			.append('line')
+			.attr('class', 'second-tick')
+			.attr('x1',0)
+			.attr('x2',0)
+			.attr('y1', offSetX)
+			.attr('y2',(ringWidth * 7) - margin)
+			.attr('transform',function(d){
+				return 'rotate(' + scaleHours(d) * (pi) + ')'
+			})
+      .attr('stroke-width', 1)
+      .attr('stroke', 'red')
+*/
+render = function(data) {
+
+clockGroup.selectAll(".clockhand").remove()
+
+  secondArc = d3.arc()
+    .outerRadius((ringWidth * 7) - margin)
+    .innerRadius((ringWidth * 5) + margin)
+    .cornerRadius(cornerRadius)
+    .startAngle(function(d) {
+      return scaleSecs(d.numeric) - handspan
+    })
+    .endAngle(function(d) {
+      return scaleSecs(d.numeric) + handspan
+    })
+
+  minuteArc = d3.arc()
+    .outerRadius((ringWidth * 5) - margin)
+    .innerRadius((ringWidth * 3) + margin)
+    .cornerRadius(cornerRadius)
+    .startAngle(function(d) {
+      return scaleMins(d.numeric) - handspan
+    })
+    .endAngle(function(d) {
+      return scaleMins(d.numeric) + handspan
+    })
+
+  hourArc = d3.arc()
+    .outerRadius((ringWidth * 3) - margin)
+    .innerRadius((ringWidth * 0) + margin)
+    .cornerRadius(cornerRadius)
+    .startAngle(function(d) {
+      return scaleHours(d.numeric % 12) - handspan
+    })
+    .endAngle(function(d) {
+      return scaleHours(d.numeric % 12) + handspan
+    })
+
+  clockGroup.selectAll(".clockhand")
+    .data(data)
+    .enter()
+    .append("svg:path")
+    .attr("d", function(d) {
+      if (d.unit === "seconds") {
+        return secondArc(d)
+      } else if (d.unit === "minutes") {
+        return minuteArc(d)
+      } else if (d.unit === "hours") {
+        return hourArc(d)
+      }
+    })
+    .attr('id', function(d) {
+      if (d.unit === 'seconds') {
+        return 'seconds-hand'
+      } else if (d.unit === 'minutes') {
+        return 'minutes-hand'
+      } else if (d.unit === 'hours') {
+        return 'hours-hand'
+      }
+    })
+    .attr("class", "clockhand")
+    .attr("stroke", "black")
+    .attr("stroke-width", function(d) {
+      if (d.unit === "seconds") {
+        return 0
+      } else if (d.unit === "minutes") {
+        return 0
+      } else if (d.unit === "hours") {
+        return 0
+      }
+    })
+
+    d3.select('#seconds-hand').style("fill-opacity", 0)
+    .transition()
+    .duration(600)
+    .style("fill-opacity", 1)
+}
+
+setInterval(function() {
+  var data
+  data = fields()
+  return render(data)
+}, 1000)
+
+</script>

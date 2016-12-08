@@ -1,0 +1,4 @@
+- name: Gradients
+  path: /gradients/
+- name: Clock
+  path: /clock/
