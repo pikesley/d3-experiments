@@ -1,32 +1,23 @@
 ---
+grads:
+  - title: Linear
+    div:   linear
+  - title: Cosine (0 to π)
+    div:   half-cos
+  - title: Cosine (-π to π)
+    div:   cos
 ---
 
-<h1>Linear scale</h1>
+{% for scale in page.grads %}
+<h1>{{ scale.title }}</h1>
 <div class='row'>
   <div class='col-md-6'>
-    <div id='linear' class='logo'></div>
+    <h2>Regular</h2>
+    <div id='{{ scale.div }}' class='logo'></div>
   </div>
   <div class='col-md-6'>
-    <div id='linear-fuzzed' class='logo'></div>
+    <h2>Fuzzed</h2>
+    <div id='{{ scale.div }}-fuzzed' class='logo'></div>
   </div>
 </div>
-
-<h1>Cosine scale (0 to π)</h1>
-<div class='row'>
-  <div class='col-md-6'>
-    <div id='half-cos' class='logo'></div>
-  </div>
-  <div class='col-md-6'>
-    <div id='half-cos-fuzzed' class='logo'></div>
-  </div>
-</div>
-
-<h1>Cosine scale (-π to π)</h1>
-<div class='row'>
-  <div class='col-md-6'>
-    <div id='cos' class='logo'></div>
-  </div>
-  <div class='col-md-6'>
-    <div id='cos-fuzzed' class='logo'></div>
-  </div>
-</div>
+{% endfor %}

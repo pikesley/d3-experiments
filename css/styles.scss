@@ -20,7 +20,7 @@
   filter: drop-shadow($shadow-offset $shadow-offset $shadow-size $shadow-colour);
 }
 
-h1 {
+h1, h2 {
   color: $brand-primary;
   font-family: $font-primary;
 }
