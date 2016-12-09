@@ -1,7 +1,9 @@
 ---
 ---
 
-<div id='multicolour-primary' class='logo'></div>
-<div id='multicolour-secondary-1' class='logo'></div>
-<div id='multicolour-secondary-2' class='logo'></div>
-<div id='multicolour-complement' class='logo'></div>
+<h1>Linear</h1>
+<div class='row'>
+{% for group in site.data.colours.groups %}
+<div id='multicolour-{{ group }}' class='logo col-md-6'></div>
+{% endfor %}
+</div>

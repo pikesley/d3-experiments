@@ -40,61 +40,25 @@ d3.json('{{ site.baseurl }}/assets/images/logos/sam.pikesley.org.svg.json', func
   weighting = d3.scaleQuantize()
                 .domain([0, data.width])
                 .range([0, 1, 2, 3, 4])
-  mc = render('multicolour-primary')
 
-  for (i = 0; i < 5; i++) {
-    mc.classed('primary-shade-' + i, function(d) {
-      if (weighting(d.x) == i) {
-        return true
-      } else {
-        return false
-      }
-    })
-  }
+  mcs = [
+    {% for group in site.data.colours.groups %}
+    '{{ group }}',
+    {% endfor %}
+  ]
 
-  weighting = d3.scaleQuantize()
-                .domain([0, data.width])
-                .range([0, 1, 2, 3, 4])
-  mc = render('multicolour-secondary-1')
-
-  for (i = 0; i < 5; i++) {
-    mc.classed('secondary-1-shade-' + i, function(d) {
-      if (weighting(d.x) == i) {
-        return true
-      } else {
-        return false
-      }
-    })
-  }
-
-  weighting = d3.scaleQuantize()
-                .domain([0, data.width])
-                .range([0, 1, 2, 3, 4])
-  mc = render('multicolour-secondary-2')
-
-  for (i = 0; i < 5; i++) {
-    mc.classed('secondary-2-shade-' + i, function(d) {
-      if (weighting(d.x) == i) {
-        return true
-      } else {
-        return false
-      }
-    })
-  }
-
-  weighting = d3.scaleQuantize()
-                .domain([0, data.width])
-                .range([0, 1, 2, 3, 4])
-  mc = render('multicolour-complement')
-
-  for (i = 0; i < 5; i++) {
-    mc.classed('complement-shade-' + i, function(d) {
-      if (weighting(d.x) == i) {
-        return true
-      } else {
-        return false
-      }
-    })
+  for (i = 0; i < mcs.length; i++) {
+    name = mcs[i]
+    mc = render('multicolour-' + name)
+    for (j = 0; j < 5; j++) {
+      mc.classed(name + '-shade-' + j, function(d) {
+        if (weighting(d.x) == j) {
+          return true
+        } else {
+          return false
+        }
+      })
+    }
   }
 
   function base(div) {
