@@ -6,4 +6,4 @@ defaults:
     layout: default
 permalink: pretty
 
-baseurl: /d3
+baseurl: /d3-experiments
