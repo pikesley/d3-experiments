@@ -15,6 +15,12 @@
     stroke-width: 0.1;
   }
 
+  .active {
+    fill: red;
+    stroke: darken($brand-secondary-2, 10%);
+    stroke-width: 0.1;
+  }
+
   @each $colour in $primaries {
     $i: index($primaries, $colour) - 1;
     .primary-shade-#{$i} {
@@ -49,5 +55,20 @@
       stroke: darken($colour, 10%);
       stroke-width: 0.1;
     }
+  }
+
+  .test-shade-0,
+  .test-shade-2,
+  .test-shade-4 {
+    fill: black;
+    stroke: black;
+    stroke-width: 0.1;
+  }
+
+  .test-shade-1,
+  .test-shade-3 {
+    fill: white;
+    stroke: black;
+    stroke-width: 0.1;
   }
 }

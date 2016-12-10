@@ -7,16 +7,17 @@ grads:
   - title: Cosine (-π to π)
     div:   cos
 ---
+<h1>Two-tone gradients</h1>
 
 {% for scale in page.grads %}
-<h1>{{ scale.title }}</h1>
+<hr />
 <div class='row'>
   <div class='col-md-6'>
-    <h2>Regular</h2>
+    <h2>{{ scale.title }}</h2>
     <div id='{{ scale.div }}' class='logo'></div>
   </div>
   <div class='col-md-6'>
-    <h2>Fuzzed</h2>
+    <h2>{{ scale.title }} fuzzed</h2>
     <div id='{{ scale.div }}-fuzzed' class='logo'></div>
   </div>
 </div>

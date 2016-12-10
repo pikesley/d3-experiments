@@ -21,10 +21,14 @@
 }
 
 h1, h2 {
-  color: $brand-primary;
+  color: $brand-complement;
   font-family: $font-primary;
 }
 
 h2 {
-  color: $brand-complement;
+  color: $brand-primary;
+}
+
+h1 {
+  text-align: center;
 }
