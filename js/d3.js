@@ -8,9 +8,24 @@ d3.json('{{ site.baseurl }}/assets/images/logos/sam.pikesley.org.svg.json', func
                 .interpolate(d3.interpolateHcl)
                 .range([
                   d3.rgb(getFillColour('.logo .pixel')),
-                  d3.rgb(getFillColour('.logo .alt-pixel'))])
+                  d3.rgb(getFillColour('.logo .alt-pixel'))
+                ])
 
-  i = render('interpolated')
+  i = render('interpolated-hcl')
+      .classed('pixel', false)
+      .attr('fill', function(d) {
+        return weighting(d.x)
+      })
+
+  weighting = d3.scaleLinear()
+                .domain([0, data.width])
+                .interpolate(d3.interpolateLab)
+                .range([
+                  d3.rgb(getFillColour('.logo .pixel')),
+                  d3.rgb(getFillColour('.logo .alt-pixel'))
+                ])
+
+  i = render('interpolated-lab')
       .classed('pixel', false)
       .attr('fill', function(d) {
         return weighting(d.x)
@@ -111,11 +126,12 @@ d3.json('{{ site.baseurl }}/assets/images/logos/sam.pikesley.org.svg.json', func
     })
   }
 
-    function getFillColour(selector) {
-      rules = document.styleSheets[2].cssRules
-      for(i in rules) {
-        if(rules[i].selectorText == selector) return rules[i].style.fill
-      }
-      return false;
+// http://stackoverflow.com/questions/16965515/how-to-get-a-style-attribute-from-a-css-class-by-javascript-jquery/16965902#16965902
+  function getFillColour(selector) {
+    rules = document.styleSheets[2].cssRules
+    for(i in rules) {
+      if(rules[i].selectorText == selector) return rules[i].style.fill
     }
+    return false;
+  }
 })

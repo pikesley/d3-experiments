@@ -3,8 +3,10 @@
   children:
     - name: Two-tone
       path: /gradients/two-tone/
-    - name: Multicolour 
+    - name: Multicolour
       path: /gradients/multicolour/
+    - name: Interpolated 
+      path: /gradients/interpolated/
 
 - name: Clock
   path: /clock/
