@@ -32,3 +32,25 @@ h2 {
 h1 {
   text-align: center;
 }
+
+.board {
+  padding: $padding-large-vertical;
+  border: $padding-large-vertical solid $brand-secondary-1;
+  text-align: center;
+}
+
+.throw {
+  fill: $brand-complement;
+  stroke: darken($brand-complement, 10%);
+  stroke-width: 0.1;
+}
+
+.hit {
+  fill: $brand-primary;
+  stroke: darken($brand-primary, 10%);
+  stroke-width: 0.1;
+}
+
+.figure {
+  text-align: right;
+}

@@ -1,0 +1,86 @@
+---
+---
+
+<div class='row'>
+  <div class='col-md-6'>
+    <div id='board'></div>
+  </div>
+  <div class='col-md-6'>
+    <div id='values'>
+      <table class='table'>
+        <tr>
+          <td>Throws</td><td id='throws' class='figure'></td>
+        </tr>
+        <tr>
+          <td>Hits</td><td id='hits' class='figure'></td>
+        </tr>
+        <tr>
+          <td>Pi</td><td id='pi' class='figure'></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+side = 400
+radius = 1
+
+boardScale = d3.scaleLinear()
+               .domain([0, 1])
+               .range([0, side])
+
+board = d3.select('#board')
+  .append('div')
+  .classed('board', true)
+  .append('svg')
+  .attr('preserveAspectRatio', 'xMinYMin meet')
+  .attr('viewBox', '0 0 ' + (side) + ' ' + (side))
+  .append('g')
+
+function update(data) {
+  board.selectAll('circle')
+        .data(data)
+        .enter()
+        .append('circle')
+        .attr('cx', function(d) {
+          return boardScale(d.x)
+        })
+        .attr('cy', function(d) {
+          return boardScale(d.y)
+        })
+        .attr('r', radius)
+        .classed('throw', true)
+        .classed('hit', function(d) {
+          if ((Math.sqrt((d.x * d.x) + (d.y * d.y))) < 1) {
+            hits++
+            return true
+          } else {
+            return false
+          }
+        })
+}
+
+data = [{
+  x: Math.random(),
+  y: Math.random()
+}]
+
+hits = 0
+throws = 0
+
+$('#pi').text('3')
+update(data)
+
+d3.interval(function() {
+  throws++
+  $('#throws').text(throws)
+  $('#hits').text(hits)
+  $('#pi').text((4.0 * (hits / throws)).toFixed(16))
+  data.push({
+    x: Math.random(),
+    y: Math.random()
+  })
+  update(data)
+}, 1)
+</script>
