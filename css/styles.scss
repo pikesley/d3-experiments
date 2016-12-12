@@ -35,20 +35,19 @@ h1 {
 
 .board {
   padding: $padding-large-vertical;
-  border: $padding-large-vertical solid $brand-secondary-1;
-  text-align: center;
+  border: $padding-large-vertical solid $brand-primary;
 }
 
 .throw {
-  fill: $brand-complement;
-  stroke: darken($brand-complement, 10%);
-  stroke-width: 0.1;
+  fill: $brand-secondary-1;
+  stroke: darken($brand-secondary-1, 50%);
+  stroke-width: 0.5;
 }
 
 .hit {
-  fill: $brand-primary;
-  stroke: darken($brand-primary, 10%);
-  stroke-width: 0.1;
+  fill: $brand-secondary-2;
+  stroke: lighten($brand-secondary-2, 50%);
+  stroke-width: 0.5;
 }
 
 .figure {

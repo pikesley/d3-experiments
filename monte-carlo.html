@@ -1,30 +1,60 @@
 ---
 ---
 
+<h1>Approximating π by throwing darts</h1>
+
 <div class='row'>
-  <div class='col-md-6'>
+  <div class='col-md-4'>
     <div id='board'></div>
+    <table class='table'>
+      <tr>
+        <td>Throws</td><td id='throws' class='figure'></td>
+      </tr>
+      <tr>
+        <td>Hits</td><td id='hits' class='figure'></td>
+      </tr>
+      <tr>
+        <td>π</td><td id='pi' class='figure'></td>
+      </tr>
+    </table>
   </div>
-  <div class='col-md-6'>
-    <div id='values'>
-      <table class='table'>
-        <tr>
-          <td>Throws</td><td id='throws' class='figure'></td>
-        </tr>
-        <tr>
-          <td>Hits</td><td id='hits' class='figure'></td>
-        </tr>
-        <tr>
-          <td>Pi</td><td id='pi' class='figure'></td>
-        </tr>
-      </table>
+  <div class='col-md-7'>
+    <div id='explanation'>
+      <p>
+        We can approximate π using nothing more than random numbers and some
+        simple geometry: we randomly throw darts at a square board of
+        side r; within the square we inscribe a quadrant of a circle of radius r
+        with its centre at (0, 0). We count all of the 'throws'; if a dart lands
+        within the quadrant, we also count a 'hit'.
+      </p>
+      <p>
+        For a large number of throws, we see that:
+      </p>
+      <pre>
+                     hits    area_of_quadrant
+                    ------ = ----------------
+                    throws    area_of_square</pre>
+      <p>
+        Some half-remembered geometry tells us that:
+      </p>
+      <pre>
+             area_of_quadrant   (1 / 4) * π * r^2    π
+             ---------------- = ------------------ = -
+              area_of_square           r^2           4</pre>
+      <p>
+        Or:
+      </p>
+      <pre>
+                       area_of_quadrant        hits
+               π = 4 * ---------------- = 4 * ------
+                        area_of_square        throws</pre>
     </div>
   </div>
 </div>
 
 <script>
 side = 400
-radius = 1
+radius = 4
 
 boardScale = d3.scaleLinear()
                .domain([0, 1])
@@ -35,7 +65,7 @@ board = d3.select('#board')
   .classed('board', true)
   .append('svg')
   .attr('preserveAspectRatio', 'xMinYMin meet')
-  .attr('viewBox', '0 0 ' + (side) + ' ' + (side))
+  .attr('viewBox', '0 0 ' + (side + radius * 2) + ' ' + (side + radius * 2))
   .append('g')
 
 function update(data) {
@@ -44,10 +74,10 @@ function update(data) {
         .enter()
         .append('circle')
         .attr('cx', function(d) {
-          return boardScale(d.x)
+          return boardScale(d.x) + (radius)
         })
         .attr('cy', function(d) {
-          return boardScale(d.y)
+          return boardScale(d.y) + (radius)
         })
         .attr('r', radius)
         .classed('throw', true)
@@ -73,14 +103,14 @@ $('#pi').text('3')
 update(data)
 
 d3.interval(function() {
-  throws++
-  $('#throws').text(throws)
-  $('#hits').text(hits)
-  $('#pi').text((4.0 * (hits / throws)).toFixed(16))
   data.push({
     x: Math.random(),
     y: Math.random()
   })
   update(data)
+  throws++
+  $('#throws').text(throws)
+  $('#hits').text(hits)
+  $('#pi').text((4.0 * (hits / throws)).toFixed(16))
 }, 1)
 </script>
