@@ -5,8 +5,10 @@
       path: /gradients/two-tone/
     - name: Multicolour
       path: /gradients/multicolour/
-    - name: Interpolated 
+    - name: Interpolated
       path: /gradients/interpolated/
 
+- name: Approximating Pi
+  path: /monte-carlo/
 - name: Clock
   path: /clock/

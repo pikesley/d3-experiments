@@ -1,6 +1,5 @@
 ---
 ---
-
 <h1>Approximating π by throwing darts</h1>
 
 <div class='row'>
@@ -23,9 +22,12 @@
   </div>
 </div>
 
+<!--<button onclick="interval += 100">slower</button>
+<button onclick="interval -= 100">faster</button>-->
+
 <script>
 side = 400
-radius = 4
+radius = 3
 
 boardScale = d3.scaleLinear()
                .domain([0, 1])
@@ -41,25 +43,33 @@ board = d3.select('#board')
 
 function update(data) {
   board.selectAll('circle')
-        .data(data)
-        .enter()
-        .append('circle')
-        .attr('cx', function(d) {
-          return boardScale(d.x) + (radius)
-        })
-        .attr('cy', function(d) {
-          return boardScale(d.y) + (radius)
-        })
-        .attr('r', radius)
-        .classed('throw', true)
-        .classed('hit', function(d) {
-          if ((Math.sqrt((d.x * d.x) + (d.y * d.y))) < 1) {
-            hits++
-            return true
-          } else {
-            return false
-          }
-        })
+       .data(data)
+       .enter()
+       .append('circle')
+       .attr('cx', function(d) {
+         return boardScale(d.x) + (radius)
+       })
+       .attr('cy', function(d) {
+         return boardScale(d.y) + (radius)
+       })
+       .classed('throw', true)
+       .classed('hit', function(d) {
+         if (hit(d)) {
+           hits++
+           return true
+         } else {
+           return false
+         }
+       })
+       .attr('r', 0)
+       .transition()
+       .attr('r', radius)
+}
+
+function hit(d) {
+  return (Math.sqrt(
+           (d.x * d.x) + (d.y * d.y)
+         )) < 1
 }
 
 data = [{
@@ -69,6 +79,7 @@ data = [{
 
 hits = 0
 throws = 0
+interval = 100
 
 $('#pi').text('3')
 update(data)
@@ -83,5 +94,5 @@ d3.interval(function() {
   $('#throws').text(throws)
   $('#hits').text(hits)
   $('#pi').text((4.0 * (hits / throws)).toFixed(16))
-}, 1)
+}, interval)
 </script>

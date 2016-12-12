@@ -56,6 +56,10 @@ h1 {
 
 .maths {
   @extend .well;
-  font-size: 2em;
+  font-size: 1.3em;
   text-align: center;
+}
+
+#explanation {
+  text-align: justify;
 }
