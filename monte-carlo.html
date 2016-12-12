@@ -19,36 +19,7 @@
     </table>
   </div>
   <div class='col-md-7'>
-    <div id='explanation'>
-      <p>
-        We can approximate π using nothing more than random numbers and some
-        simple geometry: we randomly throw darts at a square board of
-        side r; within the square we inscribe a quadrant of a circle of radius r
-        with its centre at (0, 0). We count all of the 'throws'; if a dart lands
-        within the quadrant, we also count a 'hit'.
-      </p>
-      <p>
-        For a large number of throws, we see that:
-      </p>
-      <pre>
-                     hits    area_of_quadrant
-                    ------ = ----------------
-                    throws    area_of_square</pre>
-      <p>
-        Some half-remembered geometry tells us that:
-      </p>
-      <pre>
-             area_of_quadrant   (1 / 4) * π * r^2    π
-             ---------------- = ------------------ = -
-              area_of_square           r^2           4</pre>
-      <p>
-        Or:
-      </p>
-      <pre>
-                       area_of_quadrant        hits
-               π = 4 * ---------------- = 4 * ------
-                        area_of_square        throws</pre>
-    </div>
+    {% include monte-carlo-explanation.html %}
   </div>
 </div>
 
