@@ -8,7 +8,7 @@
     - name: Interpolated
       path: /gradients/interpolated/
 
-- name: Approximating Pi
+- name: Approximating π
   path: /monte-carlo/
 - name: Clock
   path: /clock/

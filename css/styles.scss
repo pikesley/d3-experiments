@@ -63,3 +63,14 @@ h1 {
 #explanation {
   text-align: justify;
 }
+
+#main-list {
+  width: 100%;
+  height: auto;
+  max-width: 600px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 2em;
+  font-family: $font-primary;
+}
