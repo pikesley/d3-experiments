@@ -3,72 +3,26 @@ layout: null
 ---
 
 interpolaters = [
-  d3.interpolateRgb,
-  d3.interpolateHsl,
-  d3.interpolateHslLong,
-  d3.interpolateLab,
-  d3.interpolateHcl
+  {% for interpolater in site.data.colours.interpolaters %}
+  d3.interpolate{{ interpolater }},
+  {% endfor %}
 ]
 
 d3.json('{{ site.baseurl }}/assets/images/logos/sam.pikesley.org.svg.json', function(data) {
-  rgb = d3.scaleLinear()
-                .domain([0, data.width])
-                .interpolate(d3.interpolateRgb)
-                .range([
-                  d3.rgb(getFillColour('.logo .pixel')),
-                  d3.rgb(getFillColour('.logo .alt-pixel'))
-                ])
-
-  render('#interpolated-rgb')
-      .classed('pixel', false)
-      .attr('fill', function(d) {
-        return rgb(d.x)
-      })
-
-  hsl = d3.scaleLinear()
-                .domain([0, data.width])
-                .interpolate(d3.interpolateHsl)
-                .range([
-                  d3.rgb(getFillColour('.logo .pixel')),
-                  d3.rgb(getFillColour('.logo .alt-pixel'))
-                ])
-
-  render('#interpolated-hsl')
-      .classed('pixel', false)
-      .attr('fill', function(d) {
-        return hsl(d.x)
-      })
-
-
-  hcl = d3.scaleLinear()
-                .domain([0, data.width])
-                .interpolate(d3.interpolateHcl)
-                .range([
-                  d3.rgb(getFillColour('.logo .pixel')),
-                  d3.rgb(getFillColour('.logo .alt-pixel'))
-                ])
-
-  render('#interpolated-hcl')
-      .classed('pixel', false)
-      .attr('fill', function(d) {
-        return hcl(d.x)
-      })
-
-  lab = d3.scaleLinear()
-                .domain([0, data.width])
-                .interpolate(d3.interpolateHcl)
-                .range([
-                  d3.rgb(getFillColour('.logo .pixel')),
-                  d3.rgb(getFillColour('.logo .alt-pixel'))
-                ])
-
-  render('#interpolated-lab')
-      .classed('pixel', false)
-      .attr('fill', function(d) {
-        return lab(d.x)
-      })
-
-
+  {% for interpolater in site.data.colours.interpolaters %}
+    scale = d3.scaleLinear()
+                  .domain([0, data.width])
+                  .interpolate(d3.interpolate{{ interpolater }})
+                  .range([
+                    d3.rgb(getFillColour('.logo .pixel')),
+                    d3.rgb(getFillColour('.logo .alt-pixel'))
+                  ])
+    render('#interpolated-{{ interpolater }}')
+        .classed('pixel', false)
+        .attr('fill', function(d) {
+          return scale(d.x)
+        })
+  {% endfor %}
 
   // linear
   weighting = d3.scaleLinear()

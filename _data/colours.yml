@@ -3,3 +3,13 @@ groups:
   - secondary-1
   - secondary-2
   - complement
+
+interpolaters:
+  - Rgb
+  - Lab
+  - Hsl
+  - HslLong
+  - Hcl
+  - HclLong
+  - Cubehelix
+  - CubehelixLong
