@@ -57,6 +57,16 @@ d3.json('{{ site.baseurl }}/assets/images/logos/sam.pikesley.org.svg.json', func
     return (Math.random() > ((Math.cos(weighting(x)) + 1) / 2))
   })
 
+  function twoTone(div, comparator) {
+    render(div, comparator).classed('alt-pixel', function(d) {
+      if (comparator(d.x)) {
+        return true
+      } else {
+        return false
+      }
+    })
+  }
+
   // multicolour
   weighting = d3.scaleQuantize()
                 .domain([0, data.width])
@@ -107,16 +117,6 @@ d3.json('{{ site.baseurl }}/assets/images/logos/sam.pikesley.org.svg.json', func
                     .attr('height', 1)
                     .attr('width', 1)
                     .classed('pixel', true)
-  }
-
-  function twoTone(div, comparator) {
-    render(div, comparator).classed('alt-pixel', function(d) {
-      if (comparator(d.x)) {
-        return true
-      } else {
-        return false
-      }
-    })
   }
 
 // http://stackoverflow.com/questions/16965515/how-to-get-a-style-attribute-from-a-css-class-by-javascript-jquery/16965902#16965902
