@@ -6,8 +6,12 @@
 
 <div class='row'>
   {% for interpolater in site.data.colours.interpolaters %}
-  <div class='col-md-6'>
-    <h2>{{ interpolater }}</h2>
+  <div class='col-md-6 interpolated'>
+    <h2>
+      <a href='//github.com/d3/d3-interpolate#interpolate{{ interpolater }}'>
+        {{ interpolater }}
+      </a>
+    </h2>
     <div id='interpolated-{{ interpolater }}' class='logo'></div>
   </div>
   {% endfor %}

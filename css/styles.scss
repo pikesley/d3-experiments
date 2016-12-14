@@ -74,3 +74,10 @@ h1 {
   font-size: 2em;
   font-family: $font-primary;
 }
+
+.interpolated {
+  a:hover {
+    text-decoration: none;
+    color: darken($brand-primary, 20%);
+  }
+}
