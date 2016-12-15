@@ -24,37 +24,33 @@ d3.json('{{ site.baseurl }}/assets/images/logos/sam.pikesley.org.svg.json', func
         })
   {% endfor %}
 
+  scale = d3.scaleLinear().domain([0, data.width])
+
   // linear
-  weighting = d3.scaleLinear()
-                .domain([0, data.width])
-                .range([0, 1])
+  linear = scale.range([0, 1])
   twoTone('#linear', function(x) {
-    return (0.5 > weighting(x))
+    return (0.5 > linear(x))
   })
   twoTone('#linear-fuzzed', function(x) {
-    return (Math.random() > weighting(x))
+    return (Math.random() > linear(x))
   })
 
   // half-cos
-  weighting = d3.scaleLinear()
-                .domain([0, data.width])
-                .range([Math.PI, 0])
+  halfCos = scale.range([Math.PI, 0])
   twoTone('#half-cos', function(x) {
-    return (0.5 > ((Math.cos(weighting(x)) + 1) / 2))
+    return (0.5 > ((Math.cos(halfCos(x)) + 1) / 2))
   })
   twoTone('#half-cos-fuzzed', function(x) {
-    return (Math.random() > ((Math.cos(weighting(x)) + 1) / 2))
+    return (Math.random() > ((Math.cos(halfCos(x)) + 1) / 2))
   })
 
   // full cos
-  weighting = d3.scaleLinear()
-                .domain([0, data.width])
-                .range([-Math.PI, Math.PI])
+  cos = scale.range([-Math.PI, Math.PI])
   twoTone('#cos', function(x) {
-    return (0.5 > ((Math.cos(weighting(x)) + 1) / 2))
+    return (0.5 > ((Math.cos(cos(x)) + 1) / 2))
   })
   twoTone('#cos-fuzzed', function(x) {
-    return (Math.random() > ((Math.cos(weighting(x)) + 1) / 2))
+    return (Math.random() > ((Math.cos(cos(x)) + 1) / 2))
   })
 
   function twoTone(div, comparator) {
@@ -119,12 +115,18 @@ d3.json('{{ site.baseurl }}/assets/images/logos/sam.pikesley.org.svg.json', func
                     .classed('pixel', true)
   }
 
-// http://stackoverflow.com/questions/16965515/how-to-get-a-style-attribute-from-a-css-class-by-javascript-jquery/16965902#16965902
+  // http://stackoverflow.com/questions/16965515/how-to-get-a-style-attribute-from-a-css-class-by-javascript-jquery/16965902#16965902
   function getFillColour(selector) {
-    rules = document.styleSheets[3].cssRules
-    for(i in rules) {
-      if(rules[i].selectorText == selector) return rules[i].style.fill
+    sheets = document.styleSheets
+    for (i in sheets) {
+      rules = sheets[i].cssRules
+      for (j in rules) {
+        if (rules[j].selectorText == selector) {
+          return rules[j].style.fill
+        }
+      }
     }
-    return false;
+
+    return 'false'
   }
 })

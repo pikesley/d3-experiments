@@ -54,6 +54,23 @@ h1 {
   text-align: right;
 }
 
+.table {
+  font-family: $font-primary;
+  font-size: 1.2em;
+}
+
+#throws-row {
+  color: $brand-secondary-1;
+}
+
+#hits-row {
+  color: $brand-secondary-2;
+}
+
+#pi-row {
+  color: $brand-primary;
+}
+
 .maths {
   @extend .well;
   font-size: 1.3em;
