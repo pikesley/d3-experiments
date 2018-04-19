@@ -1,12 +1,12 @@
-- name: Gradients
-  path: /gradients/
-  children:
-    - name: Two-tone
-      path: /gradients/two-tone/
-    - name: Multicolour
-      path: /gradients/multicolour/
-    - name: Interpolated
-      path: /gradients/interpolated/
+#- name: Gradients
+#  path: /gradients/
+#  children:
+#    - name: Two-tone
+#      path: /gradients/two-tone/
+#    - name: Multicolour
+#      path: /gradients/multicolour/
+#    - name: Interpolated
+#      path: /gradients/interpolated/
 
 - name: Approximating π
   path: /monte-carlo/
